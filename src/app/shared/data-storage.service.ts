@@ -9,7 +9,10 @@ export class DataStorageService {
 
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
-    this.http.put('https://angular-max-41709.firebaseio.com/recipes.json', recipes);
+    this.http.put('https://angular-max-41709.firebaseio.com/recipes.json', recipes)
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 
 }
