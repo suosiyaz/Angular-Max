@@ -20,6 +20,7 @@ import { DataStorageService } from './shared/data-storage.service';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeResolverService } from './recipes/recipe-resolver.service';
 import { AuthComponent } from './auth/auth.component';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   imports: [
@@ -50,7 +51,7 @@ import { AuthComponent } from './auth/auth.component';
     RecipeService, 
     ShoppingListService, 
     DataStorageService, 
-    RecipeResolverService
+    RecipeResolverService, AuthService
   ]
 })
 export class AppModule { }
