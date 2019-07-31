@@ -21,6 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeResolverService } from './recipes/recipe-resolver.service';
 import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './auth/auth.service';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,7 @@ import { AuthService } from './auth/auth.service';
     DropdownDirective, 
     RecipeStartComponent, 
     RecipeEditComponent, 
-    AuthComponent 
+    AuthComponent, LoadingSpinnerComponent 
   ],
   bootstrap: [ 
     AppComponent 
