@@ -43,7 +43,8 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     DropdownDirective, 
     RecipeStartComponent, 
     RecipeEditComponent, 
-    AuthComponent, LoadingSpinnerComponent 
+    AuthComponent, 
+    LoadingSpinnerComponent 
   ],
   bootstrap: [ 
     AppComponent 
@@ -52,7 +53,8 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     RecipeService, 
     ShoppingListService, 
     DataStorageService, 
-    RecipeResolverService, AuthService
+    RecipeResolverService, 
+    AuthService
   ]
 })
 export class AppModule { }
