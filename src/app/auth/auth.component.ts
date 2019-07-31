@@ -29,23 +29,19 @@ export class AuthComponent implements OnInit {
     this.isLoading = true;
 
     if(this.isLoginMode) {
-      this.authService.login(email, password).subscribe(resData => {
-        console.log(resData);
-        this.isLoading = false;
-      }, errorMessage => {   
-        this.error = errorMessage;     
-        this.isLoading = false;
-      });
+      authObs = this.authService.login(email, password);
     }
     else {
-      this.authService.signup(email, password).subscribe(resData => {
+      authObs = this.authService.signup(email, password);
+    }
+
+    authObs.subscribe(resData => {
         console.log(resData);
         this.isLoading = false;
-      }, errorMessage => {   
+      }, errorMessage => {  
         this.error = errorMessage;     
         this.isLoading = false;
       });
-    }
     
     form.reset();
   }

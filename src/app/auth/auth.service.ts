@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, Subject } from 'rxjs';
+import { User } from './user.model';
 
 export interface AuthResponseData {
   kind: string;
@@ -15,6 +16,7 @@ export interface AuthResponseData {
 
 @Injectable()
 export class AuthService {
+  user = new Subject<User>();
 
   constructor(private http: HttpClient) { }
 
@@ -26,17 +28,7 @@ export class AuthService {
         password: password,
         returnSecureToken: true
       }
-    ).pipe(catchError(errorRes => {
-        let errorMessage = 'An unknown error occured!';
-        if(!errorRes.error || !errorRes.error.error) {
-          return throwError(errorMessage);
-        }
-        switch(errorRes.error.error.message) {
-          case 'EMAIL_EXISTS': 
-            errorMessage = 'This email exists already';
-        }
-        return throwError(errorMessage);
-    }));
+    ).pipe(catchError(this.handleError));
   }
 
   login(email: string, password: string) {
@@ -46,7 +38,33 @@ export class AuthService {
         email: email,
         password: password,
         returnSecureToken: true
-      });
+      }
+    ).pipe(catchError(this.handleError));;
+  }
+
+  private handleError(errorRes: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occured!';
+        if(!errorRes.error || !errorRes.error.error) {
+          return throwError(errorMessage);
+        }
+        switch(errorRes.error.error.message) {
+          case 'EMAIL_EXISTS': 
+            errorMessage = 'This email exists already!';
+            break;
+          case 'EMAIL_NOT_FOUND':
+            errorMessage = 'This email does not exist!';
+            break;
+          case 'INVALID_PASSWORD':
+            errorMessage = 'The password is not correct!';
+            break;
+          case 'USER_DISABLED':
+            errorMessage = 'Your account is disabled. Please contact the Administrator.';
+            break;
+          case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+            errorMessage = 'We have blocked all requests from this device due to unusual activity. Try again later.';
+            break;
+        }
+        return throwError(errorMessage);
   }
 
 }
