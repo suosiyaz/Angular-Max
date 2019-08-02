@@ -23,7 +23,7 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthService } from './auth/auth.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { AuthGuard } from './auth/auth.guard';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   imports: [
@@ -46,7 +46,7 @@ import { AuthGuard } from './auth/auth.guard';
     RecipeStartComponent, 
     RecipeEditComponent, 
     AuthComponent, 
-    LoadingSpinnerComponent 
+    LoadingSpinnerComponent, AlertComponent 
   ],
   bootstrap: [ 
     AppComponent 
@@ -58,7 +58,6 @@ import { AuthGuard } from './auth/auth.guard';
     RecipeResolverService, 
     AuthService, 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
-    AuthGuard
   ]
 })
 export class AppModule { }
