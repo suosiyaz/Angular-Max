@@ -40,7 +40,8 @@ export class AuthComponent implements OnInit {
         this.isLoading = false;
         this.router.navigate(['/recipes']);
       }, errorMessage => {  
-        this.error = errorMessage;     
+        this.error = errorMessage;   
+        this.showErrorAlert(errorMessage);  
         this.isLoading = false;
       });
     
@@ -49,6 +50,10 @@ export class AuthComponent implements OnInit {
 
   onHandleError() {
     this.error = null;
+  }
+
+  private showErrorAlert(message: string) {
+
   }
 
   ngOnInit() {
