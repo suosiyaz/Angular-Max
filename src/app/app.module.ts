@@ -59,6 +59,9 @@ import { PlaceholderDirective } from './shared/placeholder/placeholder.directive
     RecipeResolverService, 
     AuthService, 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
+  ],
+  entryComponents: [
+    AlertComponent
   ]
 })
 export class AppModule { }
